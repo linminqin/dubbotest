@@ -1,6 +1,6 @@
-package com.lmiky.dubbo.provider.service.impl;
+package com.lmiky.dubbo.service.impl;
 
-import com.lmiky.dubbo.provider.service.DemoService;
+import com.lmiky.dubbo.service.DemoService;
 
 /**
  * @author lmiky

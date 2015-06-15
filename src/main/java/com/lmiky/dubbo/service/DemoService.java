@@ -1,4 +1,4 @@
-package com.lmiky.dubbo.provider.service;
+package com.lmiky.dubbo.service;
 
 /**
  * ≤‚ ‘
