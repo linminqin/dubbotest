@@ -23,8 +23,9 @@ public class Provider {
 	public static void main(String[] args) throws IOException {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[] { "config/provider.xml" });
 		context.start();
+		System.out.println("provider start!");
 		System.in.read(); // 按任意键退出
-		System.out.println("provider close!");
+		System.out.println("provider end!");
 
 	}
 

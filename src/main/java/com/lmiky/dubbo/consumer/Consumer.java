@@ -1,5 +1,7 @@
 package com.lmiky.dubbo.consumer;
 
+import java.util.Scanner;
+
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.lmiky.dubbo.service.DemoService;
@@ -15,16 +17,18 @@ public class Consumer {
 	 * @date 2015年6月15日 下午2:05:49
 	 * @param args
 	 */
+	@SuppressWarnings("resource")
 	public static void main(String[] args) {
-		@SuppressWarnings("resource")
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[] {"config/consumer.xml"});
         context.start();
- 
         DemoService demoService = (DemoService)context.getBean("demoService"); // 获取远程服务代理
-        String hello = demoService.sayHello("lmiky"); // 执行远程方法
- 
-        System.out.println(hello); // 显示调用结果
-
+        Scanner sc=new Scanner(System.in);
+        System.out.println("begin input...");
+        String name = null;
+        while(!"end".endsWith(name = sc.next())) {
+        	System.out.println(demoService.sayHello(name)); // 显示调用结果
+        }
+        System.out.println("...end input");
 	}
 
 }
