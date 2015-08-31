@@ -41,21 +41,25 @@ public class SpringContainer implements Container {
     }
 
     public void start() {
+        System.out.println("starting.......");
         String configPath = ConfigUtils.getProperty(SPRING_CONFIG);
         if (configPath == null || configPath.length() == 0) {
             configPath = DEFAULT_SPRING_CONFIG;
         }
         context = new ClassPathXmlApplicationContext(configPath.split("[,\\s]+"));
         context.start();
+        System.out.println("started.......");
     }
 
     public void stop() {
         try {
+            System.out.println("closing.......");
             if (context != null) {
                 context.stop();
                 context.close();
                 context = null;
             }
+            System.out.println("closed.......");
         } catch (Throwable e) {
             logger.error(e.getMessage(), e);
         }

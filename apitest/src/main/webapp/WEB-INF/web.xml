@@ -26,7 +26,7 @@
 	<!-- 定义Spring XML 的上下文 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value> classpath*:config/applicationContext*.xml</param-value>
+		<param-value> classpath*:config/applicationContext*.xml,classpath*:config/dubbo*.xml</param-value>
 	</context-param>
 
 	<!-- Spring的编码转换过滤器 -->
