@@ -17,7 +17,6 @@
 			<artifactId>platform-service</artifactId>
 			<version>0.1</version>
 		</dependency>
-
 		<!-- Servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>

@@ -7,7 +7,7 @@
 		http://www.springframework.org/schema/tx
 		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
 
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
         <property name="driverClassName" value="${db.driverClassName}"/>
         <property name="url" value="${db.url}"/>
         <property name="username" value="${db.username}"/>
@@ -23,14 +23,14 @@
 		<property name="minIdle" value="${db.minIdle}" />
 		<!-- 最大等待时间，当没有可用连接时，连接池等待连接释放的最大时间，超过该时间限制会抛出异常，如果设置-1表示无限等待（默认为无限，调整为60000ms，避免因线程池不够用，而导致请求被无限制挂起） -->
 		<property name="maxWait" value="${db.maxWait}" />
-		
+
 		<property name="defaultAutoCommit" value="${db.defaultAutoCommit}" />
 		<!-- sql心跳检查 -->
 		<!-- 1. 性能问题。-->
 		<!-- 目前网站的应用大部分的瓶颈还是在I/O这一块，大部分的I/O还是在数据库的这一层面上，每一个请求可能会调用10来次SQL查询，如果不走事务，一个请求会重复获取链接，如果每次获取链接,比如在testOnBorrow都进行validateObject，性能开销不是很能接受，可以假定一次SQL操作消毫0.5~1ms(一般走了网络请求基本就这数)-->
 		<!-- 2 ．成本和收益-->
 		<!-- 网站异常数据库重启，网络异常断开的频率是非常低的，一般也就在数据库升级，演习维护时才会进行，而且一般也是选在晚上，访问量相对比较低的请求，而且一般会有人员值班关注，所以异步的validateObject是可以接受，但一个前提需要确保能保证在一个合理的时间段内，数据库能完成自动重联。 -->
-		
+
 		<!-- GenericObjectPool中针对pool管理，起了一个 异步Evict的TimerTask定时线程进行控制 ( 可通过设置参数 timeBetweenEvictionRunsMillis>0), 定时对线程池中的链接进行validateObject校验，对无效的链接进行关闭后，会调用ensureMinIdle，适当建立链接保证最小的minIdle连接数 -->
 		<property name= "testWhileIdle"  value="${db.testWhileIdle}"/>
 		<!-- 在进行borrowObject进行处理时，对拿到的connection进行validateObject校验 -->
@@ -60,8 +60,8 @@
         <property name="mapperLocations" value="classpath*:config/mappers/**/*.xml" />
     </bean>
 
-	<bean id="sqlSessionTemplate"  class="org.mybatis.spring.SqlSessionTemplate"> 
-	      <constructor-arg index="0" ref="sqlSessionFactory" /> 
+	<bean id="sqlSessionTemplate"  class="org.mybatis.spring.SqlSessionTemplate">
+	      <constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
 
 	<!-- 事务 -->
