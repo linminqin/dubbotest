@@ -41,14 +41,12 @@ public class SpringContainer implements Container {
     }
 
     public void start() {
-        System.out.println("starting.......");
         String configPath = ConfigUtils.getProperty(SPRING_CONFIG);
         if (configPath == null || configPath.length() == 0) {
             configPath = DEFAULT_SPRING_CONFIG;
         }
         context = new ClassPathXmlApplicationContext(configPath.split("[,\\s]+"));
         context.start();
-        System.out.println("started.......");
     }
 
     public void stop() {
