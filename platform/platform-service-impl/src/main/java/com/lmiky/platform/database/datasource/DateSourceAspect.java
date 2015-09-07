@@ -34,6 +34,7 @@ public class DateSourceAspect {
         Object target = pjp.getTarget();
         String cacheKey = target.getClass().getName() + "." + method.getName();
         Boolean cacheValue = methodReadOrWriteCache.get(cacheKey);
+        System.out.println(cacheKey + ": cacheValue========" + cacheValue);
         if (cacheValue == null) {
             // 重新获取方法，否则传递的是接口的方法信息
             Method realMethod = target.getClass().getMethod(method.getName(), method.getParameterTypes());
@@ -66,7 +67,7 @@ public class DateSourceAspect {
             return true;
         }
         // 如果之前选择了写库 现在还选择 写库
-        if (!DynamicDataSourceHolder.isReadDateSource()) {
+        if (DynamicDataSourceHolder.isWriteDateSource()) {
             return false;
         }
         if (transactionalAnno.readOnly()) {

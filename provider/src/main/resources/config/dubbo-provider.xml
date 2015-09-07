@@ -25,5 +25,6 @@
  
     <!-- 声明需要暴露的服务接口 -->
     <dubbo:service interface="com.lmiky.platform.service.BaseService" ref="baseService"  />
+    <dubbo:service interface="com.lmiky.platform.test.service.TestService" ref="testService"  />
    
 </beans>

@@ -23,5 +23,6 @@
 
     <!-- 生成远程服务代理，可以和本地bean一样使用demoService -->
     <dubbo:reference id="baseService" interface="com.lmiky.platform.service.BaseService" timeout="6000" />
+    <dubbo:reference id="testService"  interface="com.lmiky.platform.test.service.TestService"  />
 
 </beans>

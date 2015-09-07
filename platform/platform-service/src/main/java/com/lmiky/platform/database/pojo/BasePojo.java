@@ -17,10 +17,11 @@ import javax.persistence.MappedSuperclass;
  * @author lmiky
  * @date 2013-4-15
  */
-@SuppressWarnings("serial")
 @MappedSuperclass
-public abstract class BasePojo implements Serializable, Cloneable {
-	public static final String POJO_FIELD_NAME_ID = "id";
+public class BasePojo implements Serializable, Cloneable {
+    private static final long serialVersionUID = 8575216058907498704L;
+
+    public static final String POJO_FIELD_NAME_ID = "id";
 	
 	private Long id;
 

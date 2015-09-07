@@ -69,17 +69,17 @@ public class DynamicDataSourceHolder {
     }
 
     /**
-     * 判断当前是否只读数据源
+     * 判断当前是否读写数据源
      *
      * @return
      * @author lmiky
      * @date 2015年9月7日 下午5:42:00
      */
-    public static boolean isReadDateSource() {
+    public static boolean isWriteDateSource() {
         String datasource = getDataSouce();
         if (datasource == null) {
             return false;
         }
-        return datasource.endsWith(DATASOURCE_READ);
+        return datasource.endsWith(DATASOURCE_WRITE);
     }
 }
