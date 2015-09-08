@@ -6,6 +6,7 @@ package com.lmiky.platform.test.service.impl;
 import com.lmiky.platform.database.pojo.BasePojo;
 import com.lmiky.platform.service.exception.ServiceException;
 import com.lmiky.platform.service.impl.BaseServiceImpl;
+import com.lmiky.platform.sort.pojo.BaseSortPojo;
 import com.lmiky.platform.test.service.TestService;
 import com.lmiky.platform.tree.pojo.BaseTreePojo;
 
@@ -44,18 +45,40 @@ public class TestServiceImpl extends BaseServiceImpl implements TestService {
         return null;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see com.lmiky.platform.test.service.TestService#findTree(java.lang.Long)
+    /* (non-Javadoc)
+     * @see com.lmiky.platform.test.service.TestService#findPojo(java.lang.Long)
      */
     @Override
     @Transactional(readOnly = true)
-    public BaseTreePojo findTree(Long id) throws ServiceException {
-        BaseTreePojo pojo = new BaseTreePojo();
-        pojo.setId(0l);
-        pojo.setName("tests");
+    public BasePojo findPojo(Long id) throws ServiceException {
+        BasePojo pojo = find(BaseTreePojo.class, id);
         return pojo;
         // return find(BaseTreePojo.class, id);
+    }
+
+    /* (non-Javadoc)
+     * @see com.lmiky.platform.test.service.TestService#findSortPojo(java.lang.Long)
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public BaseSortPojo findSortPojo(Long id) throws ServiceException {
+        BaseSortPojo pojo = new BaseSortPojo();
+        pojo.setId(11111l);
+        pojo.setSort(11111);
+        return pojo;
+    }
+
+    /* (non-Javadoc)
+     * @see com.lmiky.platform.test.service.TestService#findTreePojo(java.lang.Long)
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public BaseTreePojo findTreePojo(Long id) throws ServiceException {
+        BaseTreePojo pojo = new BaseTreePojo();
+        pojo.setId(11111l);
+        pojo.setSort(11111);
+        pojo.setName("test");
+        return pojo;
     }
 
 }
