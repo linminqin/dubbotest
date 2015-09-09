@@ -1,17 +1,5 @@
 package com.lmiky.apitest.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.lmiky.platform.controller.BaseApiController;
 import com.lmiky.platform.controller.view.BaseCodeDataListView;
 import com.lmiky.platform.controller.view.BaseCodeDataView;
@@ -24,6 +12,18 @@ import com.lmiky.platform.test.service.TestService;
 import com.lmiky.platform.tree.pojo.BaseTreePojo;
 import com.lmiky.platform.util.Environment;
 import com.lmiky.platform.util.IPUtils;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author lmiky

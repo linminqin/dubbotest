@@ -36,8 +36,8 @@ public interface TestService extends BaseService {
      * @author lmiky
      * @date 2015年9月8日 上午9:17:37
      */
-    public BasePojo findPojo(Long id) throws ServiceException;
-    
+    public <T extends BasePojo> T findPojo(Long id) throws ServiceException;
+
     /**
      * 测试
      *
@@ -48,7 +48,7 @@ public interface TestService extends BaseService {
      * @date 2015年9月8日 上午9:17:37
      */
     public BaseSortPojo findSortPojo(Long id) throws ServiceException;
-    
+
     /**
      * 测试
      *

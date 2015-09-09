@@ -45,18 +45,23 @@ public class TestServiceImpl extends BaseServiceImpl implements TestService {
         return null;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see com.lmiky.platform.test.service.TestService#findPojo(java.lang.Long)
      */
+    @SuppressWarnings("unchecked")
     @Override
     @Transactional(readOnly = true)
-    public BasePojo findPojo(Long id) throws ServiceException {
+    public <T extends BasePojo> T findPojo(Long id) throws ServiceException {
         BasePojo pojo = find(BaseTreePojo.class, id);
-        return pojo;
+        pojo = new BasePojo();
+        pojo.setId(111l);
+        return (T) pojo;
         // return find(BaseTreePojo.class, id);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see com.lmiky.platform.test.service.TestService#findSortPojo(java.lang.Long)
      */
     @Override
@@ -68,7 +73,8 @@ public class TestServiceImpl extends BaseServiceImpl implements TestService {
         return pojo;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see com.lmiky.platform.test.service.TestService#findTreePojo(java.lang.Long)
      */
     @Override
