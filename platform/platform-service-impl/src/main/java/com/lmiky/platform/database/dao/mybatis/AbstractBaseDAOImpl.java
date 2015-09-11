@@ -12,7 +12,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 public abstract class AbstractBaseDAOImpl {
 
 	protected SqlSessionTemplate sqlSessionTemplate;
-	
+
 	/**
 	 * @return the sqlSessionTemplate
 	 */

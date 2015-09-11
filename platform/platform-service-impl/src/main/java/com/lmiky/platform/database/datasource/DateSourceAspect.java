@@ -18,7 +18,7 @@ public class DateSourceAspect {
     /**
      * 缓存
      */
-    private static ConcurrentHashMap<String, Boolean> methodReadOrWriteCache = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String, Boolean> methodIsReadCache = new ConcurrentHashMap<>();
 
     /**
      * 决策是否只读
@@ -33,17 +33,17 @@ public class DateSourceAspect {
         Method method = ((MethodSignature) pjp.getSignature()).getMethod();
         Object target = pjp.getTarget();
         String cacheKey = target.getClass().getName() + "." + method.getName();
-        Boolean cacheValue = methodReadOrWriteCache.get(cacheKey);
-        if (cacheValue == null) {
+        Boolean isReadCacheValue = methodIsReadCache.get(cacheKey);
+        if (isReadCacheValue == null) {
             // 重新获取方法，否则传递的是接口的方法信息
             Method realMethod = target.getClass().getMethod(method.getName(), method.getParameterTypes());
-            cacheValue = isChoiceReadDB(realMethod);
-            methodReadOrWriteCache.put(cacheKey, cacheValue);
+            isReadCacheValue = isChoiceReadDB(realMethod);
+            methodIsReadCache.put(cacheKey, isReadCacheValue);
         }
-        if (cacheValue) {
-            DynamicDataSourceHolder.putReadDateSource();
+        if (isReadCacheValue) {
+            DynamicDataSourceHolder.markRead();
         } else {
-            DynamicDataSourceHolder.putWriteDateSource();
+            DynamicDataSourceHolder.markWrite();
         }
         try {
             return pjp.proceed();
@@ -66,7 +66,7 @@ public class DateSourceAspect {
             return true;
         }
         // 如果之前选择了写库，则现在还选择写库
-        if (DynamicDataSourceHolder.isWriteDateSource()) {
+        if (DynamicDataSourceHolder.isChoiceWrite()) {
             return false;
         }
         if (transactionalAnno.readOnly()) {

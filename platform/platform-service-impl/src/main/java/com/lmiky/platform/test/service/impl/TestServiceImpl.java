@@ -3,6 +3,7 @@
  */
 package com.lmiky.platform.test.service.impl;
 
+import com.lmiky.platform.database.dao.BaseDAO;
 import com.lmiky.platform.database.pojo.BasePojo;
 import com.lmiky.platform.service.exception.ServiceException;
 import com.lmiky.platform.service.impl.BaseServiceImpl;
@@ -15,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 /**
  * 测试
  *
@@ -23,6 +26,22 @@ import java.util.List;
  */
 @Service("testService")
 public class TestServiceImpl extends BaseServiceImpl implements TestService {
+    private BaseDAO otherBaseDAO;
+
+    /**
+     * @return the otherBaseDAO
+     */
+    public BaseDAO getOtherBaseDAO() {
+        return otherBaseDAO;
+    }
+
+    /**
+     * @param otherBaseDAO the otherBaseDAO to set
+     */
+    @Resource(name = "otherBaseDAO")
+    public void setOtherBaseDAO(BaseDAO otherBaseDAO) {
+        this.otherBaseDAO = otherBaseDAO;
+    }
 
     /*
      * (non-Javadoc)
@@ -31,18 +50,24 @@ public class TestServiceImpl extends BaseServiceImpl implements TestService {
     @Override
     @Transactional(rollbackFor = { Exception.class })
     public <T extends BasePojo> T test(Class<T> pojoClass) throws ServiceException {
-        List<T> pojos = list(pojoClass);
+        T ret = null;
+        List<T> pojos = baseDAO.list(pojoClass);
         if (pojos.size() > 0) {
             BasePojo basePojo = pojos.get(0);
-            update(pojoClass, basePojo.getId(), BasePojo.POJO_FIELD_NAME_ID, basePojo.getId() + 1000);
-            basePojo = find(pojoClass, basePojo.getId() + 1000);
-            System.out.println(basePojo.getId());
+            baseDAO.update(pojoClass, basePojo.getId(), BasePojo.POJO_FIELD_NAME_ID, basePojo.getId() + 1000);
+            ret = baseDAO.find(pojoClass, basePojo.getId() + 1000);
         }
-        pojos = list(pojoClass);
+//      int i = 1;
+//      i = i/0;
+        pojos = otherBaseDAO.list(pojoClass);
         if (pojos.size() > 0) {
-            return find(pojoClass, pojos.get(0).getId());
+            BasePojo basePojo = pojos.get(0);
+            otherBaseDAO.update(pojoClass, basePojo.getId(), BasePojo.POJO_FIELD_NAME_ID, basePojo.getId() + 1000);
+            ret = otherBaseDAO.find(pojoClass, basePojo.getId() + 1000);
         }
-        return null;
+//         int i = 1;
+//         i = i/0;
+        return ret;
     }
 
     /*
