@@ -14,7 +14,6 @@ import javax.persistence.Table;
 import net.sf.cglib.proxy.Enhancer;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.stereotype.Repository;
 
 import com.lmiky.platform.database.dao.BaseDAO;
 import com.lmiky.platform.database.exception.DatabaseException;
@@ -30,7 +29,6 @@ import com.lmiky.platform.util.BundleUtils;
  * @author lmiky
  * @date 2013-4-15
  */
-@Repository("baseDAO")
 public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 
 	// 参数字段
@@ -92,7 +90,7 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * sql方法名：修改
 	 */
 	protected static final String SQLNAME_UPDATE = "update";
-	
+
 	/**
 	 * sql方法名：根据参数修改修改
 	 */
@@ -101,12 +99,12 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * sql方法名：根据条件修改修改
 	 */
 	protected static final String SQLNAME_UPDATE_BY_FILTERS = "updateByFilters";
-	
+
 	/**
 	 * sql方法名：删除
 	 */
 	protected static final String SQLNAME_DELETE = "delete";
-	
+
 	/**
 	 * sql方法名：根据ID批量删除
 	 */
@@ -126,12 +124,12 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * 对象对应的数据库表名
 	 */
 	protected Map<String, String> pojoTableNames = new HashMap<String, String>();
-	
+
 	/**
 	 * 操作配置：自定义执行，或通用的执行
 	 */
 	protected Map<String, String> operateConfig = new HashMap<String, String>();
-	
+
 	//操作配置值
 	/**
 	 * 通用
@@ -141,7 +139,7 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * 自定义
 	 */
 	protected static final String OPEARATE_CONFIG_CUSTOM = "custom";
-	
+
 	/**
 	 * 获取实体类的表名
 	 * @author lmiky
@@ -196,7 +194,7 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 		operateConfig.put(cacheKey, cacheValue);
 		return cacheValue;
 	}
-	
+
 	/**
 	 * 获取执行类
 	 * @author lmiky
@@ -212,7 +210,7 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 			return (Class<T>) pojo.getClass();
 		}
 	}
-	
+
 	/**
 	 * 获取执行类
 	 * @author lmiky
@@ -227,7 +225,7 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 			return pojoClass;
 		}
 	}
-	
+
 	/**
 	 * 获取对象需要执行的类
 	 * @author lmiky
@@ -258,7 +256,7 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 		}
 		return classList;
 	}
-	
+
 	/**
 	 * 获取操作空间名
 	 * @author lmiky
@@ -275,19 +273,19 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 			return pojoClass.getName() + "." + operateName;
 		}
 	}
-	
+
 	/**
 	 * 生成参数
 	 * @author lmiky
 	 * @date 2014年9月9日 上午10:23:01
 	 * @param pojoClass
 	 * @return
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	protected <T extends BasePojo> Map<String, Object> generateParameterMap(Class<T> pojoClass) throws Exception {
 		return generateParameterMap(pojoClass, new ArrayList<PropertyFilter>());
 	}
-	
+
 	/**
 	 * 生成参数
 	 * @author lmiky
@@ -300,7 +298,7 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	protected <T extends BasePojo> Map<String, Object> generateParameterMap(Class<T> pojoClass, PropertyFilter... propertyFilters) throws Exception {
 		return generateParameterMap(pojoClass, Arrays.asList(propertyFilters));
 	}
-	
+
 	/**
 	 * 生成参数
 	 * @author lmiky
@@ -308,12 +306,12 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * @param pojoClass
 	 * @param propertyFilters
 	 * @return
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	protected <T extends BasePojo> Map<String, Object> generateParameterMap(Class<T> pojoClass,  List<PropertyFilter> propertyFilters) throws Exception {
 		return generateParameterMap(pojoClass, propertyFilters, null);
 	}
-	
+
 	/**
 	 * 生成参数
 	 * @author lmiky
@@ -321,15 +319,15 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 	 * @param pojoClass
 	 * @param propertyFilters
 	 * @return
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	protected <T extends BasePojo> Map<String, Object> generateParameterMap(Class<T> pojoClass,  List<PropertyFilter> propertyFilters, List<Sort> sorts) throws Exception {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put(PARAM_NAME_TABLENAME, getPojoTabelName(pojoClass));
-		params.put(PARAM_NAME_TABLEALIAS, pojoClass.getSimpleName());	
+		params.put(PARAM_NAME_TABLEALIAS, pojoClass.getSimpleName());
 		boolean hasJoin = false;	//是否有级联别的表
-		List<String> joinTableAlias = new ArrayList<String>();	
-		List<String> joinPojoAlias = new ArrayList<String>();	
+		List<String> joinTableAlias = new ArrayList<String>();
+		List<String> joinPojoAlias = new ArrayList<String>();
 		String pojoClassName = pojoClass.getName();
 		if((propertyFilters == null || propertyFilters.isEmpty()) && (sorts == null || sorts.isEmpty())) {
 			params.put(PARAM_NAME_HAS_JOIN, false);
@@ -404,12 +402,12 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 			String fieldName = filterPropertyName.substring(splitIndex + 1);	//属性字段
 			if(BasePojo.POJO_FIELD_NAME_ID.equals(fieldName)) {	//获取外键字段
 				Method fieldMethod = BaseTreePojo.class.getMethod("get" + com.lmiky.platform.util.StringUtils.firstLetterUpperCase(pojoName));
-				JoinColumn joinColumnAnnotation = fieldMethod.getAnnotation(JoinColumn.class); 
+				JoinColumn joinColumnAnnotation = fieldMethod.getAnnotation(JoinColumn.class);
 				filter.setPropertyName(joinColumnAnnotation.name());//外键注解
 			}
 		}
 	}
-	
+
 	/**
 	 * 设置排序参数
 	 * @author lmiky
@@ -432,7 +430,7 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 		sorts.add(sort);
 		setSortParameter(parameterMap, sorts);
 	}
-	
+
 	/**
 	 * 设置分页参数
 	 * @author lmiky
@@ -445,7 +443,7 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 		parameterMap.put(PARAM_NAME_PAGE_FIRST, pageFirst);
 		parameterMap.put(PARAM_NAME_PAGE_SIZE, pageSize);
 	}
-	
+
 	/**
 	 * 设置排序参数
 	 * @author lmiky
@@ -462,7 +460,7 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 		sort.setSortClass(sortClass);
 		setSortParameter(parameterMap, sort);
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#isDBPojo(java.lang.Class)
 	 */
@@ -471,9 +469,9 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 			return getPojoTabelName(pojoClass) != null;
 		} catch (Exception e) {
 			throw new DatabaseException(e.getMessage());
-		} 
+		}
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#find(java.lang.Class, java.lang.Long)
@@ -548,7 +546,7 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 			throw new DatabaseException(e.getMessage());
 		}
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#save(com.lmiky.platform.database.pojo.BasePojo)
@@ -695,7 +693,7 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 			throw new DatabaseException(e.getMessage());
 		}
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#update(java.lang.Class, java.util.List, java.util.Map)
 	 */
@@ -854,7 +852,7 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 			throw new DatabaseException(e.getMessage());
 		}
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#list(java.lang.Class, com.lmiky.platform.database.model.Sort)
@@ -870,7 +868,7 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 			throw new DatabaseException(e.getMessage());
 		}
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#list(java.lang.Class, com.lmiky.platform.database.model.PropertyFilter, com.lmiky.platform.database.model.Sort)
@@ -902,7 +900,7 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 			throw new DatabaseException(e.getMessage());
 		}
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#list(java.lang.Class, java.util.List, java.util.List)
@@ -1043,7 +1041,7 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 			throw new DatabaseException(e.getMessage());
 		}
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#count(java.lang.Class, java.util.Map)
 	 */
@@ -1100,7 +1098,7 @@ public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 			throw new DatabaseException(e.getMessage());
 		}
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.database.dao.BaseDAO#exist(java.lang.Class, java.util.Map)
 	 */

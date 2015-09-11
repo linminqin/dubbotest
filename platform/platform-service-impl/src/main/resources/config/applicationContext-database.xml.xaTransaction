@@ -70,14 +70,6 @@
     <constructor-arg index="0" ref="otherSqlSessionFactory" />
   </bean>
 
-  <bean id="baseDAO" class="com.lmiky.platform.database.dao.mybatis.BaseDAOImpl">
-    <property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
-  </bean>
-
-  <bean id="otherBaseDAO" class="com.lmiky.platform.database.dao.mybatis.BaseDAOImpl">
-    <property name="sqlSessionTemplate" ref="otherSqlSessionTemplate" />
-  </bean>
-
   <!-- atomikos事务管理器 -->
   <bean id="atomikosTransactionManager" class="com.atomikos.icatch.jta.UserTransactionManager" init-method="init"
     destroy-method="close">
