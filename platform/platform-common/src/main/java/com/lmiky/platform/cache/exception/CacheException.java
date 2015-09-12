@@ -4,16 +4,16 @@ package com.lmiky.platform.cache.exception;
  * @author lmiky
  * @date 2013-4-23
  */
-public class CacheException extends Exception {
-	private static final long serialVersionUID = 346439786719062677L;
+public class CacheException extends RuntimeException {
+    private static final long serialVersionUID = 6586809315285846429L;
 
-	/**
-	 * 
+    /**
+	 *
 	 */
 	public CacheException(){
 		super();
 	}
-	
+
 	/**
 	 * @param message
 	 */

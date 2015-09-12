@@ -69,4 +69,14 @@ public interface TestService extends BaseService {
      * @date 2015年9月8日 上午9:17:37
      */
     public BaseTreePojo findTreePojo(Long id) throws ServiceException;
+
+    /**
+     * 测试缓存
+     *
+     * @param id
+     * @return
+     * @author lmiky
+     * @date 2015年9月12日 上午11:48:51
+     */
+    public BaseTreePojo testCache(Long id);
 }

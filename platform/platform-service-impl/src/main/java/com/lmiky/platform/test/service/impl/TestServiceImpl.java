@@ -3,6 +3,9 @@
  */
 package com.lmiky.platform.test.service.impl;
 
+import com.lmiky.platform.cache.exception.CacheException;
+import com.lmiky.platform.cache.model.ObjectCache;
+import com.lmiky.platform.cache.model.SimpleCacheData;
 import com.lmiky.platform.database.dao.BaseDAO;
 import com.lmiky.platform.database.pojo.BasePojo;
 import com.lmiky.platform.service.exception.ServiceException;
@@ -28,6 +31,7 @@ import javax.annotation.Resource;
 public class TestServiceImpl extends BaseServiceImpl implements TestService {
     private BaseDAO xaBaseDAO;
     private BaseDAO otherXABaseDAO;
+    private ObjectCache cache;
 
 
     /* (non-Javadoc)
@@ -125,6 +129,32 @@ public class TestServiceImpl extends BaseServiceImpl implements TestService {
         return pojo;
     }
 
+    /* (non-Javadoc)
+     * @see com.lmiky.platform.test.service.TestService#testCache(java.lang.Long)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    @Transactional(readOnly = true)
+    public BaseTreePojo testCache(Long id) {
+        String cacheKey = BaseTreePojo.class.getName() + "_" + id;
+        BaseTreePojo pojo = null;
+        try {
+            SimpleCacheData<BaseTreePojo> cacheData = (SimpleCacheData<BaseTreePojo>)cache.get(cacheKey);
+            if(cacheData == null || cacheData.getValue() == null) {
+                pojo = find(BaseTreePojo.class, id);
+                cacheData = new SimpleCacheData<BaseTreePojo>(pojo);
+                cache.put(cacheKey, cacheData);
+            } else {
+                pojo = cacheData.getValue();
+            }
+        } catch (CacheException e) {
+            e.printStackTrace();
+        } catch (ServiceException e) {
+            e.printStackTrace();
+        }
+        return pojo;
+    }
+
     /**
      * @return the xaBaseDAO
      */
@@ -153,6 +183,21 @@ public class TestServiceImpl extends BaseServiceImpl implements TestService {
     @Resource(name="otherXABaseDAO")
     public void setOtherXABaseDAO(BaseDAO otherXABaseDAO) {
         this.otherXABaseDAO = otherXABaseDAO;
+    }
+
+    /**
+     * @return the cache
+     */
+    public ObjectCache getCache() {
+        return cache;
+    }
+
+    /**
+     * @param cache the cache to set
+     */
+    @Resource(name="testCache")
+    public void setCache(ObjectCache cache) {
+        this.cache = cache;
     }
 
 }

@@ -215,6 +215,32 @@ public class TestApiController extends BaseApiController {
     }
 
     /**
+     * 测试缓存
+     *
+     * @param modelMap
+     * @param request
+     * @param response
+     * @param id
+     * @return
+     * @throws Exception
+     * @author lmiky
+     * @date 2015年9月12日 下午1:36:38
+     */
+    @RequestMapping("/testCache.shtml")
+    public String testCache(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response, Long id) throws Exception {
+        try {
+            LoggerUtils.info(String.format("IP[%s]进入到testCache测试接口中", IPUtils.getRealIP(request)));
+            BaseTreePojo pojo = testService.testCache(id);
+            Map<String, Object> data = new HashMap<>();
+            data.put("pojo", pojo);
+            modelMap.put(BaseCodeDataListView.KEY_NAME_DATA, data);
+        } catch (Exception e) {
+            transactException(modelMap, request, response, e);
+        }
+        return BaseJsonView.getViewName(BaseCodeDataView.class);
+    }
+
+    /**
      * @return the testService
      */
     public TestService getTestService() {

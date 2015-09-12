@@ -8,11 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.lmiky.platform.cache.CacheFactory;
-import com.lmiky.platform.cache.model.ObjectCache;
-import com.lmiky.platform.cache.model.SimpleCacheData;
 import com.lmiky.platform.json.util.JsonUtils;
-import com.lmiky.platform.logger.util.LoggerUtils;
 
 /**
  * IP地址工具类
@@ -29,9 +25,9 @@ public class IPUtils {
 	public static final String PARAMNAME_CITY = "city";
 
 	// 缓存
-	private static final CacheFactory cacheFactory = (CacheFactory) Environment.getBean("cacheFactory");
-	private static final String CACHE_HEAD_IPLOCATION = "ipLocation.";
-	private static final ObjectCache ipLocationCache = cacheFactory.getCache("ipLocationCache");
+	//private static final CacheFactory cacheFactory = (CacheFactory) Environment.getBean("cacheFactory");
+	//private static final String CACHE_HEAD_IPLOCATION = "ipLocation.";
+	//private static final ObjectCache ipLocationCache = cacheFactory.getCache("ipLocationCache");
 
 	/**
 	 * 获取真实IP
@@ -68,21 +64,20 @@ public class IPUtils {
 	 * @return
 	 * @throws Exception
 	 */
-	@SuppressWarnings("unchecked")
 	public static Map<String, String> location(String ip) throws Exception {
 		Map<String, String> locationMap = null;
 		// 读取缓存
-		SimpleCacheData<Map<String, String>> cache = (SimpleCacheData<Map<String, String>>) ipLocationCache.get(CACHE_HEAD_IPLOCATION + ip);
-		if (cache != null) {
-			return cache.getValue();
-		}
-		locationMap = sinaLocation(ip);
-		// 设置缓存
-		try {
-			ipLocationCache.put(CACHE_HEAD_IPLOCATION + ip, new SimpleCacheData<Map<String, String>>(locationMap));
-		} catch (Exception e) {
-			LoggerUtils.logException(e);
-		}
+//		SimpleCacheData<Map<String, String>> cache = (SimpleCacheData<Map<String, String>>) ipLocationCache.get(CACHE_HEAD_IPLOCATION + ip);
+//		if (cache != null) {
+//			return cache.getValue();
+//		}
+//		locationMap = sinaLocation(ip);
+//		// 设置缓存
+//		try {
+//			ipLocationCache.put(CACHE_HEAD_IPLOCATION + ip, new SimpleCacheData<Map<String, String>>(locationMap));
+//		} catch (Exception e) {
+//			LoggerUtils.logException(e);
+//		}
 		return locationMap;
 	}
 

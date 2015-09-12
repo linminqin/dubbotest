@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 
+<!--
 maxElementsInMemory：内存允许的最大存储缓存数，如果超过，在开启磁盘存储的情况下，会存入磁盘
 eternal：对象是否永久有效
 timeToIdleSeconds：对象允许空闲时间（秒），当且仅当eternal=fasle时起效，默认值为0， 即可闲置时间无穷大
@@ -12,7 +12,7 @@ memoryStoreEvictionPolicy：缓存清除策略
 <ehcache updateCheck="false">
 	<diskStore path="D:/devsoft/apache-tomcat-8.0.15-2/cache/apitest"/>
   	<defaultCache
-		maxElementsInMemory="100000"	
+		maxElementsInMemory="100000"
 		eternal="false"
 		timeToIdleSeconds="1200"
 		timeToLiveSeconds="1200"
@@ -23,11 +23,11 @@ memoryStoreEvictionPolicy：缓存清除策略
 		diskExpiryThreadIntervalSeconds="120"
 		memoryStoreEvictionPolicy="LRU"/>
 		<!-- 表单锁 -->
-		<cache name="formLockCache" 
-			maxElementsInMemory="100000"	
+		<cache name="formLockCache"
+			maxElementsInMemory="100000"
 			eternal="false"
 	    	timeToIdleSeconds="1200"
-			timeToLiveSeconds="1200" 
+			timeToLiveSeconds="1200"
 			overflowToDisk="true"
 			diskSpoolBufferSizeMB="30"
 			maxElementsOnDisk="100000"
@@ -35,11 +35,11 @@ memoryStoreEvictionPolicy：缓存清除策略
 			diskExpiryThreadIntervalSeconds="120"
 			memoryStoreEvictionPolicy="LRU"/>
 		<!-- 单点登陆 -->
-		<cache name="ssoCache" 
-			maxElementsInMemory="100000"	
+		<cache name="ssoCache"
+			maxElementsInMemory="100000"
 			eternal="false"
 	    	timeToIdleSeconds="6000"
-			timeToLiveSeconds="6000" 
+			timeToLiveSeconds="6000"
 			overflowToDisk="true"
 			diskSpoolBufferSizeMB="30"
 			maxElementsOnDisk="100000"
@@ -47,8 +47,8 @@ memoryStoreEvictionPolicy：缓存清除策略
 			diskExpiryThreadIntervalSeconds="120"
 			memoryStoreEvictionPolicy="LRU"/>
 		<!-- 菜单列表 -->
-		<cache name="menuCache" 
-			maxElementsInMemory="100000"	
+		<cache name="menuCache"
+			maxElementsInMemory="100000"
 			eternal="true"
 			overflowToDisk="true"
 			diskSpoolBufferSizeMB="30"
@@ -56,28 +56,40 @@ memoryStoreEvictionPolicy：缓存清除策略
 			diskPersistent="true"
 			diskExpiryThreadIntervalSeconds="1200"
 			memoryStoreEvictionPolicy="LRU"/>
-		<!-- 验证令牌 -->	
-		<cache name="accessTokenCache" 
-			maxElementsInMemory="100000"	
+		<!-- 验证令牌 -->
+		<cache name="accessTokenCache"
+			maxElementsInMemory="100000"
 			eternal="false"
 	    	timeToIdleSeconds="43200"
-			timeToLiveSeconds="43200" 
+			timeToLiveSeconds="43200"
 			overflowToDisk="true"
 			diskSpoolBufferSizeMB="30"
 			maxElementsOnDisk="100000"
 			diskPersistent="true"
 			diskExpiryThreadIntervalSeconds="120"
-			memoryStoreEvictionPolicy="LRU"/>	
-		<!-- IP地址定位 -->	
-		<cache name="ipLocationCache" 
-			maxElementsInMemory="100000"	
+			memoryStoreEvictionPolicy="LRU"/>
+		<!-- IP地址定位 -->
+		<cache name="ipLocationCache"
+			maxElementsInMemory="100000"
 			eternal="false"
 	    	timeToIdleSeconds="43200"
-			timeToLiveSeconds="43200" 
+			timeToLiveSeconds="43200"
 			overflowToDisk="true"
 			diskSpoolBufferSizeMB="30"
 			maxElementsOnDisk="100000"
 			diskPersistent="true"
 			diskExpiryThreadIntervalSeconds="120"
-			memoryStoreEvictionPolicy="LRU"/>	
+			memoryStoreEvictionPolicy="LRU"/>
+    <!-- test -->
+    <cache name="test"
+      maxElementsInMemory="100000"
+      eternal="false"
+        timeToIdleSeconds="43200"
+      timeToLiveSeconds="43200"
+      overflowToDisk="true"
+      diskSpoolBufferSizeMB="30"
+      maxElementsOnDisk="100000"
+      diskPersistent="true"
+      diskExpiryThreadIntervalSeconds="120"
+      memoryStoreEvictionPolicy="LRU"/>
 </ehcache>
