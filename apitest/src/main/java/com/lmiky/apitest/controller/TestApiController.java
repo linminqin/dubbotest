@@ -165,7 +165,7 @@ public class TestApiController extends BaseApiController {
     }
 
     /**
-     * 测试失误
+     * 测试事务
      *
      * @author lmiky
      * @date 2015年9月7日 下午8:48:11
@@ -179,7 +179,32 @@ public class TestApiController extends BaseApiController {
     public String testTx(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
         try {
             LoggerUtils.info(String.format("IP[%s]进入到testTx测试接口中", IPUtils.getRealIP(request)));
-            BaseTreePojo pojo = testService.test(BaseTreePojo.class);
+            BaseTreePojo pojo = testService.testTx(BaseTreePojo.class);
+            Map<String, Object> data = new HashMap<>();
+            data.put("pojo", pojo);
+            modelMap.put(BaseCodeDataListView.KEY_NAME_DATA, data);
+        } catch (Exception e) {
+            transactException(modelMap, request, response, e);
+        }
+        return BaseJsonView.getViewName(BaseCodeDataView.class);
+    }
+
+    /**
+     * 测试分布式事务
+     *
+     * @author lmiky
+     * @date 2015年9月7日 下午8:48:11
+     * @param modelMap
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/testXATx.shtml")
+    public String testXATx(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        try {
+            LoggerUtils.info(String.format("IP[%s]进入到testTx测试接口中", IPUtils.getRealIP(request)));
+            BaseTreePojo pojo = testService.testXATx(BaseTreePojo.class);
             Map<String, Object> data = new HashMap<>();
             data.put("pojo", pojo);
             modelMap.put(BaseCodeDataListView.KEY_NAME_DATA, data);

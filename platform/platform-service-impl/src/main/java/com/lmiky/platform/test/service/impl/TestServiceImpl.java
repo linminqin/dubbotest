@@ -26,30 +26,16 @@ import javax.annotation.Resource;
  */
 @Service("testService")
 public class TestServiceImpl extends BaseServiceImpl implements TestService {
-    private BaseDAO otherBaseDAO;
+    private BaseDAO xaBaseDAO;
+    private BaseDAO otherXABaseDAO;
 
-    /**
-     * @return the otherBaseDAO
-     */
-    public BaseDAO getOtherBaseDAO() {
-        return otherBaseDAO;
-    }
 
-    /**
-     * @param otherBaseDAO the otherBaseDAO to set
-     */
-    @Resource(name = "otherBaseDAO")
-    public void setOtherBaseDAO(BaseDAO otherBaseDAO) {
-        this.otherBaseDAO = otherBaseDAO;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see com.lmiky.platform.test.TestService#test(java.lang.Class)
+    /* (non-Javadoc)
+     * @see com.lmiky.platform.test.service.TestService#testTx(java.lang.Class)
      */
     @Override
     @Transactional(rollbackFor = { Exception.class })
-    public <T extends BasePojo> T test(Class<T> pojoClass) throws ServiceException {
+    public <T extends BasePojo> T testTx(Class<T> pojoClass) throws ServiceException {
         T ret = null;
         List<T> pojos = baseDAO.list(pojoClass);
         if (pojos.size() > 0) {
@@ -59,11 +45,38 @@ public class TestServiceImpl extends BaseServiceImpl implements TestService {
         }
 //      int i = 1;
 //      i = i/0;
-        pojos = otherBaseDAO.list(pojoClass);
+        pojos = baseDAO.list(pojoClass);
         if (pojos.size() > 0) {
             BasePojo basePojo = pojos.get(0);
-            otherBaseDAO.update(pojoClass, basePojo.getId(), BasePojo.POJO_FIELD_NAME_ID, basePojo.getId() + 1000);
-            ret = otherBaseDAO.find(pojoClass, basePojo.getId() + 1000);
+            baseDAO.update(pojoClass, basePojo.getId(), BasePojo.POJO_FIELD_NAME_ID, basePojo.getId() + 1000);
+            ret = baseDAO.find(pojoClass, basePojo.getId() + 1000);
+        }
+//         int i = 1;
+//         i = i/0;
+        return ret;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see com.lmiky.platform.test.TestService#testXATx(java.lang.Class)
+     */
+    @Override
+    @Transactional(rollbackFor = { Exception.class }, value="jtaTransactionManager")
+    public <T extends BasePojo> T testXATx(Class<T> pojoClass) throws ServiceException {
+        T ret = null;
+        List<T> pojos = xaBaseDAO.list(pojoClass);
+        if (pojos.size() > 0) {
+            BasePojo basePojo = pojos.get(0);
+            xaBaseDAO.update(pojoClass, basePojo.getId(), BasePojo.POJO_FIELD_NAME_ID, basePojo.getId() + 1000);
+            ret = xaBaseDAO.find(pojoClass, basePojo.getId() + 1000);
+        }
+//      int i = 1;
+//      i = i/0;
+        pojos = otherXABaseDAO.list(pojoClass);
+        if (pojos.size() > 0) {
+            BasePojo basePojo = pojos.get(0);
+            otherXABaseDAO.update(pojoClass, basePojo.getId(), BasePojo.POJO_FIELD_NAME_ID, basePojo.getId() + 1000);
+            ret = otherXABaseDAO.find(pojoClass, basePojo.getId() + 1000);
         }
 //         int i = 1;
 //         i = i/0;
@@ -110,6 +123,36 @@ public class TestServiceImpl extends BaseServiceImpl implements TestService {
         pojo.setSort(11111);
         pojo.setName("test");
         return pojo;
+    }
+
+    /**
+     * @return the xaBaseDAO
+     */
+    public BaseDAO getXaBaseDAO() {
+        return xaBaseDAO;
+    }
+
+    /**
+     * @param xaBaseDAO the xaBaseDAO to set
+     */
+    @Resource(name="xaBaseDAO")
+    public void setXaBaseDAO(BaseDAO xaBaseDAO) {
+        this.xaBaseDAO = xaBaseDAO;
+    }
+
+    /**
+     * @return the otherXABaseDAO
+     */
+    public BaseDAO getOtherXABaseDAO() {
+        return otherXABaseDAO;
+    }
+
+    /**
+     * @param otherXABaseDAO the otherXABaseDAO to set
+     */
+    @Resource(name="otherXABaseDAO")
+    public void setOtherXABaseDAO(BaseDAO otherXABaseDAO) {
+        this.otherXABaseDAO = otherXABaseDAO;
     }
 
 }

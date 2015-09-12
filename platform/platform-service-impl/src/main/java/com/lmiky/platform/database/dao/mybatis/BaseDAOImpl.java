@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import net.sf.cglib.proxy.Enhancer;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Repository;
 
 import com.lmiky.platform.database.dao.BaseDAO;
 import com.lmiky.platform.database.exception.DatabaseException;
@@ -29,6 +30,7 @@ import com.lmiky.platform.util.BundleUtils;
  * @author lmiky
  * @date 2013-4-15
  */
+@Repository("baseDAO")
 public class BaseDAOImpl extends AbstractBaseDAOImpl implements BaseDAO {
 
 	// 参数字段

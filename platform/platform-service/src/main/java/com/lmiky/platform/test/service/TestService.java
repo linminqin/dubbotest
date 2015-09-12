@@ -18,14 +18,24 @@ import com.lmiky.platform.tree.pojo.BaseTreePojo;
 public interface TestService extends BaseService {
 
     /**
-     * 测试
+     * 测试事务
      *
      * @author lmiky
      * @date 2015年9月7日 下午8:40:38
      * @param pojoClass
      * @throws ServiceException
      */
-    public <T extends BasePojo> T test(Class<T> pojoClass) throws ServiceException;
+    public <T extends BasePojo> T testTx(Class<T> pojoClass) throws ServiceException;
+
+    /**
+     * 测试分布式事务
+     *
+     * @author lmiky
+     * @date 2015年9月7日 下午8:40:38
+     * @param pojoClass
+     * @throws ServiceException
+     */
+    public <T extends BasePojo> T testXATx(Class<T> pojoClass) throws ServiceException;
 
     /**
      * 测试
