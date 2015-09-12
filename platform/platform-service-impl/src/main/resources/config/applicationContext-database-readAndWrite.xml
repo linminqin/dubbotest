@@ -81,9 +81,9 @@
   <bean id="dateSourceAspect"
     class="com.lmiky.platform.database.datasource.DateSourceAspect" />
   <aop:config expose-proxy="true">
-    <aop:aspect ref="dateSourceAspect">
+    <aop:aspect ref="dateSourceAspect" order="0">
       <aop:pointcut id="dateSourcePointcut"
-        expression="execution(* com.lmiky..service.impl..*.*(..))" />
+        expression="execution(* com.lmiky..service.impl..*.*(..))"/>
       <aop:around pointcut-ref="dateSourcePointcut" method="determineReadOrWriteDB" />
     </aop:aspect>
   </aop:config>
