@@ -3,6 +3,8 @@
  */
 package com.lmiky.dubbo.provider.main;
 
+import org.apache.log4j.PropertyConfigurator;
+
 import com.alibaba.dubbo.common.extension.ExtensionLoader;
 import com.alibaba.dubbo.container.Container;
 import com.alibaba.dubbo.container.spring.SpringContainer;
@@ -25,6 +27,7 @@ public class Main {
             LoggerUtils.info("starting.......");
             System.out.println("starting.......");
             // new SpringContainer().start();
+            PropertyConfigurator.configure(Main.class.getClassLoader().getResource("config/log4j.properties"));
             SpringContainer container = (SpringContainer) ExtensionLoader.getExtensionLoader(Container.class)
                     .getExtension("spring");
             container.start();
