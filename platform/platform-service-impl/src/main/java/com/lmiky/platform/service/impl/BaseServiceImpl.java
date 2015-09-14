@@ -35,7 +35,7 @@ public class BaseServiceImpl implements BaseService {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#find(java.lang.Class, java.io.Serializable)
@@ -60,7 +60,7 @@ public class BaseServiceImpl implements BaseService {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#find(java.lang.Class, java.util.List)
@@ -73,7 +73,7 @@ public class BaseServiceImpl implements BaseService {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#find(java.lang.Class, com.lmiky.platform.database.model.PropertyFilter[])
 	 */
@@ -85,7 +85,7 @@ public class BaseServiceImpl implements BaseService {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#find(java.lang.Class, java.util.Map)
 	 */
@@ -97,7 +97,7 @@ public class BaseServiceImpl implements BaseService {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#save(com.lmiky.platform.database.pojo.BasePojo)
@@ -114,7 +114,7 @@ public class BaseServiceImpl implements BaseService {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#save(java.util.List)
 	 */
@@ -128,7 +128,7 @@ public class BaseServiceImpl implements BaseService {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#add(com.lmiky.platform.database.pojo.BasePojo)
 	 */
@@ -140,7 +140,7 @@ public class BaseServiceImpl implements BaseService {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#add(java.util.List)
 	 */
@@ -154,7 +154,7 @@ public class BaseServiceImpl implements BaseService {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#update(com.lmiky.platform.database.pojo.BasePojo)
 	 */
@@ -166,7 +166,7 @@ public class BaseServiceImpl implements BaseService {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#update(java.util.List)
 	 */
@@ -180,7 +180,7 @@ public class BaseServiceImpl implements BaseService {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#update(java.lang.Class, java.lang.Long, java.lang.String, java.lang.Object)
 	 */
@@ -204,7 +204,7 @@ public class BaseServiceImpl implements BaseService {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#update(java.lang.Class, java.util.Map, java.util.Map)
 	 */
@@ -228,7 +228,7 @@ public class BaseServiceImpl implements BaseService {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#update(java.lang.Class, java.util.List, java.util.Map)
 	 */
@@ -240,7 +240,7 @@ public class BaseServiceImpl implements BaseService {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#delete(com.lmiky.platform.database.pojo.BasePojo)
@@ -267,7 +267,7 @@ public class BaseServiceImpl implements BaseService {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#delete(java.lang.Class, java.io.Serializable)
@@ -292,7 +292,7 @@ public class BaseServiceImpl implements BaseService {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#delete(java.lang.Class, java.lang.String, java.lang.Object)
 	 */
@@ -304,7 +304,7 @@ public class BaseServiceImpl implements BaseService {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#delete(java.lang.Class, java.util.List)
@@ -317,7 +317,7 @@ public class BaseServiceImpl implements BaseService {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#delete(java.lang.Class, com.lmiky.platform.database.model.PropertyFilter[])
 	 */
@@ -342,7 +342,7 @@ public class BaseServiceImpl implements BaseService {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#list(java.lang.Class, java.lang.String, java.lang.Object)
 	 */
@@ -366,7 +366,7 @@ public class BaseServiceImpl implements BaseService {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#list(java.lang.Class, com.lmiky.platform.database.model.Sort)
 	 */
@@ -400,7 +400,7 @@ public class BaseServiceImpl implements BaseService {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#list(java.lang.Class, java.util.List, java.util.List)
@@ -413,7 +413,7 @@ public class BaseServiceImpl implements BaseService {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#list(java.lang.Class, com.lmiky.platform.database.model.PropertyFilter[])
 	 */
@@ -425,7 +425,7 @@ public class BaseServiceImpl implements BaseService {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#list(java.lang.Class, com.lmiky.platform.database.model.Sort[])
 	 */
@@ -463,7 +463,7 @@ public class BaseServiceImpl implements BaseService {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#list(java.lang.Class, int, int, com.lmiky.platform.database.model.PropertyFilter[])
 	 */
@@ -475,7 +475,7 @@ public class BaseServiceImpl implements BaseService {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#list(java.lang.Class, int, int, com.lmiky.platform.database.model.Sort[])
 	 */
@@ -500,7 +500,7 @@ public class BaseServiceImpl implements BaseService {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#count(java.lang.Class, java.lang.String, java.lang.Object)
 	 */
@@ -525,7 +525,7 @@ public class BaseServiceImpl implements BaseService {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#count(java.lang.Class, com.lmiky.platform.database.model.PropertyFilter[])
 	 */
@@ -537,7 +537,7 @@ public class BaseServiceImpl implements BaseService {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#count(java.lang.Class, java.util.Map)
 	 */
@@ -549,7 +549,7 @@ public class BaseServiceImpl implements BaseService {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#exist(java.lang.Class, java.util.List)
 	 */
@@ -561,7 +561,7 @@ public class BaseServiceImpl implements BaseService {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#exist(java.lang.Class, com.lmiky.platform.database.model.PropertyFilter[])
 	 */
@@ -573,7 +573,7 @@ public class BaseServiceImpl implements BaseService {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#exist(java.lang.Class, java.util.Map)
 	 */
@@ -585,7 +585,7 @@ public class BaseServiceImpl implements BaseService {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.lmiky.platform.service.BaseService#exist(java.lang.Class, java.lang.String, java.lang.Object)
 	 */
@@ -597,7 +597,7 @@ public class BaseServiceImpl implements BaseService {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-	
+
 	/**
 	 * 获取DAO对象
 	 * @author lmiky
