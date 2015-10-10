@@ -2,7 +2,9 @@ package com.lmiky.platform.sort.pojo;
 
 import com.lmiky.platform.database.pojo.BasePojo;
 
-import javax.persistence.Column;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.MappedSuperclass;
 
 /**
@@ -19,20 +21,8 @@ public class BaseSortPojo extends BasePojo {
 
     public static int DEFAULT_SORT = 0;
 
+    @Getter
+    @Setter
     private Integer sort = DEFAULT_SORT;
 
-    /**
-     * @return the sort
-     */
-    @Column(name = "sort")
-    public Integer getSort() {
-        return sort;
-    }
-
-    /**
-     * @param sort the sort to set
-     */
-    public void setSort(Integer sort) {
-        this.sort = sort;
-    }
 }

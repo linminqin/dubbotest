@@ -1,11 +1,8 @@
 package com.lmiky.platform.tree.pojo;
 
-import com.lmiky.platform.sort.pojo.BaseSortPojo;
-
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
@@ -16,9 +13,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
+import com.lmiky.platform.sort.pojo.BaseSortPojo;
+
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * 树
- *
  * @author lmiky
  * @date 2014-1-2
  */
@@ -26,71 +27,45 @@ import javax.persistence.Table;
 @Table(name = "t_tree")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class BaseTreePojo extends BaseSortPojo {
-    private static final long serialVersionUID = 1L;
-    private String name;
-    private BaseTreePojo parent;
-    private Integer leaf = 0;
-    private List<BaseTreePojo> children;
+	private static final long serialVersionUID = 1L;
+	@Getter
+	@Setter
+	private String name;
+	@Getter
+	@Setter
+	private Integer leaf = 0;
+	private BaseTreePojo parent;
+	private List<BaseTreePojo> children;
 
-    /**
-     * @return the name
-     */
-    @Column(name = "name")
-    public String getName() {
-        return name;
-    }
+	/**
+	 * @return the parent
+	 */
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "parentId")
+	public BaseTreePojo getParent() {
+		return parent;
+	}
 
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
+	/**
+	 * @param parent the parent to set
+	 */
+	public void setParent(BaseTreePojo parent) {
+		this.parent = parent;
+	}
 
-    /**
-     * @return the parent
-     */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parentId")
-    public BaseTreePojo getParent() {
-        return parent;
-    }
+	/**
+	 * @return the children
+	 */
+	@OneToMany(mappedBy = "parent", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+	@OrderBy(BaseSortPojo.POJO_FIELD_NAME_SORT + " desc")
+	public List<BaseTreePojo> getChildren() {
+		return children;
+	}
 
-    /**
-     * @param parent the parent to set
-     */
-    public void setParent(BaseTreePojo parent) {
-        this.parent = parent;
-    }
-
-    /**
-     * @return the leaf
-     */
-    @Column(name = "leaf")
-    public Integer getLeaf() {
-        return leaf;
-    }
-
-    /**
-     * @param leaf the leaf to set
-     */
-    public void setLeaf(Integer leaf) {
-        this.leaf = leaf;
-    }
-
-    /**
-     * @return the children
-     */
-    @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
-    @OrderBy(BaseSortPojo.POJO_FIELD_NAME_SORT + " desc")
-    public List<BaseTreePojo> getChildren() {
-        return children;
-    }
-
-    /**
-     * @param children the children to set
-     */
-    public void setChildren(List<BaseTreePojo> children) {
-        this.children = children;
-    }
+	/**
+	 * @param children the children to set
+	 */
+	public void setChildren(List<BaseTreePojo> children) {
+		this.children = children;
+	}
 }
