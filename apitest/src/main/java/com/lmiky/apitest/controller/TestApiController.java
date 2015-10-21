@@ -87,8 +87,6 @@ public class TestApiController extends BaseApiController {
 	public CodeDataView testFind(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response, Long id) throws Exception {
 		LoggerUtils.info(String.format("IP[%s]进入到testFind测试接口中", IPUtils.getRealIP(request)));
 		BasePojo pojo = service.find(BaseTreePojo.class, id);
-		Map<String, Object> data = new HashMap<>();
-		data.put("tree", pojo);
 		return CodeDataView.buildSuccessView("tree", pojo);
 	}
 

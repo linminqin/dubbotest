@@ -28,8 +28,6 @@
 	<bean
 		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
 
-	<util:constant id="useISO8601DateFormat"
-		static-field="com.alibaba.fastjson.serializer.SerializerFeature.UseISO8601DateFormat" />
 	<bean
 		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
 		<property name="messageConverters">
