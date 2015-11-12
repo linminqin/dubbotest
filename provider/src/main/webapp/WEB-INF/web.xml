@@ -23,15 +23,22 @@
 	<listener>
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
 	</listener>
-
 	<!-- 定义Spring XML 的上下文 -->
+	<context-param>  
+	    <param-name>spring.profiles.active</param-name>  
+	    <param-value>development</param-value>  
+	</context-param>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath*:config/applicationContext*.xml,classpath*:config/dubbo*.xml</param-value>
+		<param-value>classpath*:config/**/applicationContext*.xml,classpath*:config/dubbo*.xml</param-value>
 	</context-param>
 
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<!-- 平台上下文侦听器，必须在spring侦听器之后 -->
+	<listener>
+		<listener-class>com.lmiky.platform.web.listener.PlatformContextListener</listener-class>
 	</listener>
 
 	<!-- <listener> <listener-class>com.lmiky.dubbo.provider.context.ProviderContextListener</listener-class> 

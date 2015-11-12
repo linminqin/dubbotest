@@ -3,30 +3,35 @@
 	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	id="WebApp_ID" version="2.5">
-	<display-name>gameboss</display-name>
+	<display-name>apitest</display-name>
 
 	<!-- 这里集成Log4j框架 -->
-	<!-- Log4jConfigListener是spring提供的工具类，它开启一个log4j的监视线程，并每XX（log4jRefreshInterval变量定义）秒检测日志配置变化，从而不需要每次重新启动web服务来应用新的配置。它使用 log4jRefreshInterval，所以两者都不是必须的。-->
+	<!-- Log4jConfigListener是spring提供的工具类，它开启一个log4j的监视线程，并每XX（log4jRefreshInterval变量定义）秒检测日志配置变化，从而不需要每次重新启动web服务来应用新的配置。它使用 
+		log4jRefreshInterval，所以两者都不是必须的。 -->
 	<context-param>
-  		<param-name>webAppRootKey</param-name>
+		<param-name>webAppRootKey</param-name>
 		<param-value>webapp.root.apitest</param-value>
 	</context-param>
 	<context-param>
-    	        <param-name>log4jConfigLocation</param-name>
-    	        <param-value>classpath:config/log4j.properties</param-value>
-  	</context-param>
-  	<context-param>
-    	        <param-name>log4jRefreshInterval</param-name>
-    	        <param-value>6000</param-value>
-  	</context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>classpath:config/log4j.properties</param-value>
+	</context-param>
+	<context-param>
+		<param-name>log4jRefreshInterval</param-name>
+		<param-value>6000</param-value>
+	</context-param>
 	<listener>
-               <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
-  	</listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
 
 	<!-- 定义Spring XML 的上下文 -->
 	<context-param>
+		<param-name>spring.profiles.active</param-name>
+		<param-value>development</param-value>
+	</context-param>
+	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath*:config/applicationContext*.xml,classpath*:config/dubbo*.xml</param-value>
+		<param-value>classpath*:config/**/applicationContext*.xml,classpath*:config/dubbo*.xml</param-value>
 	</context-param>
 
 	<!-- Spring的编码转换过滤器 -->
@@ -50,25 +55,29 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	<!-- 平台上下文侦听器，必须在spring侦听器之后 -->
+	<listener>
+		<listener-class>com.lmiky.platform.web.listener.PlatformContextListener</listener-class>
+	</listener>
 
-	<!--  Spring MVC-->
-    <servlet>
-        <servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
-        <servlet-class>com.lmiky.platform.servlet.DispatcherServlet</servlet-class>
+	<!-- Spring MVC -->
+	<servlet>
+		<servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
+		<servlet-class>com.lmiky.platform.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value> classpath*:config/springMVC.xml</param-value>
 		</init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
 		<url-pattern>*.shtml</url-pattern>
 	</servlet-mapping>
 
 	<session-config>
-        <session-timeout>20</session-timeout>
-    </session-config>
+		<session-timeout>20</session-timeout>
+	</session-config>
 
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
